@@ -1,13 +1,14 @@
 const express = require('express');
 const app = express();
 const PORT = 3000;
+const routes = require('./routes/user.routes');
+const logger = require('./middleware/logger');
 
 app.use(express.json());
 
-app.get("/api/products/:id", (req, res) => {
-    const body = req.params.id;
-    console.log(body);
-})
+app.use(logger)
+
+app.use("/api", routes);
 
 app.get("/", (req, res) => {
     res.send("Hiiiii");
